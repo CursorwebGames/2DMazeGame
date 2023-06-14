@@ -1,2 +1,2 @@
-# Maze Game
+# Pyrinth
 Fun maze game!

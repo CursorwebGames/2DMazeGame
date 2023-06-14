@@ -2,8 +2,8 @@ import random
 
 import pygame
 
-from defs import WIDTH, HEIGHT, screen
-from ui import Button
+from defs import WIDTH, screen
+from ui import Button, ButtonStackLayout
 
 from .page import Page
 
@@ -11,10 +11,10 @@ from .page import Page
 class Menu(Page):
     def __init__(self) -> None:
         super().__init__()
-        self.button = Button('Hello, world!')
         self.title_font = pygame.font.SysFont("candara", 100, True)
+        self.menu_layout = ButtonStackLayout(WIDTH / 2, 150, Button('hello, world!'), Button('i hate you'))
 
-        self.title = self.title_font.render("Maze", True, (0, 0, 0))
+        self.title = self.title_font.render("Pyrinth", True, (0, 0, 0))
         self.title_width, self.title_height = self.title.get_size()
 
 
@@ -29,4 +29,4 @@ class Menu(Page):
 
     def draw(self) -> None:
         screen.blit(self.title, ((WIDTH - self.title_width) / 2, 50))
-        self.button.draw(WIDTH / 2, HEIGHT / 2)
+        self.menu_layout.draw()

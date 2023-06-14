@@ -7,7 +7,7 @@ class Player:
         super().__init__()
         self.x = 1
         self.y = 1
-    
+
     @abstractmethod
     def draw(self):
         pass

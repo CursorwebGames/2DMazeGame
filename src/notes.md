@@ -1,2 +1,0 @@
-* Basic generation
-* Then what?

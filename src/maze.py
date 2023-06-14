@@ -3,10 +3,10 @@ from defs import SCREEN_SIZE
 
 class Maze:
     def __init__(self) -> None:
-        self.grid_size = 5 # must be odd!
+        self.grid_size = 5  # must be odd!
         self.wall_size = SCREEN_SIZE // self.grid_size
         self.new_grid()
-    
+
     def new_grid(self) -> None:
         self.grid = [[True] * self.grid_size for _ in [None] * self.grid_size]
 

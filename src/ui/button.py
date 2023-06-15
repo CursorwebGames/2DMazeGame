@@ -1,6 +1,7 @@
+from typing import Callable, Any
 import pygame
 
-from defs import font, mx, my, screen
+from utils import font, mx, my, screen
 
 from . import colors
 
@@ -11,7 +12,7 @@ class ButtonStyle:
 
 
 class Button:
-    def __init__(self, text: str, x=0, y=0) -> None:
+    def __init__(self, text: str, onclick: Callable[..., Any] = None, x=0, y=0) -> None:
         self.text = font.render(text, True, (255, 255, 255))
         self.text_width, self.text_height = self.text.get_size()
 

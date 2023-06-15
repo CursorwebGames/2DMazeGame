@@ -3,7 +3,7 @@ import sys
 
 import pygame
 
-from ui import Button, ButtonStackLayout
+from ui import Button, ButtonStyle, ButtonStackLayout
 from utils import WIDTH, screen
 
 from .page import Page
@@ -15,9 +15,9 @@ class Menu(Page):
         self.title_font = pygame.font.SysFont("candara", 100, True)
         self.menu_layout = ButtonStackLayout(
             WIDTH / 2, 150,
-            Button('Play'),
-            Button('Settings'),
-            Button('Quit', lambda _: sys.exit(0))
+            Button('Play', lambda _: print('hi')),
+            Button('Settings', lambda _: None, style=ButtonStyle.Secondary),
+            Button('Quit', lambda _: sys.exit(0), style=ButtonStyle.Warning)
         )
 
         self.title = self.title_font.render("Pyrinth", True, (0, 0, 0))

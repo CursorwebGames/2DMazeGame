@@ -1,3 +1,6 @@
 Primary = (241, 164, 64)
 PrimaryAccent = (206, 139, 52)
 Secondary = (95, 155, 255)
+SecondaryAccent = (82, 133, 220)
+Warning = (255, 65, 65)
+WarningAccent = (209, 58, 58)

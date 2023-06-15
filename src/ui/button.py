@@ -10,16 +10,35 @@ from . import colors
 class ButtonStyle:
     Primary = 'Primary'
     Secondary = 'Secondary'
+    Warning = 'Warning'
+
+    @staticmethod
+    def style_from(style: 'ButtonStyle'):
+        match style:
+            case ButtonStyle.Primary:
+                return colors.Primary, colors.PrimaryAccent
+
+            case ButtonStyle.Secondary:
+                return colors.Secondary, colors.SecondaryAccent
+        
+            case ButtonStyle.Warning:
+                return colors.Warning, colors.WarningAccent
 
 
 class Button:
-    def __init__(self, text: str, onclick: Callable[..., Any] = None, x=0, y=0) -> None:
+    def __init__(self,
+                 text: str,
+                 onclick: Callable[..., Any],
+                 style: ButtonStyle = ButtonStyle.Primary,
+                 font: pygame.font.Font = font,
+                 x=0, y=0) -> None:
         self.text = font.render(text, True, (255, 255, 255))
         self.text_width, self.text_height = self.text.get_size()
 
-        if onclick: event_handler[pygame.MOUSEBUTTONDOWN].append(onclick)
+        event_handler[pygame.MOUSEBUTTONDOWN].append(onclick)
 
         self.x, self.y = x, y
+        self.main, self.accent = ButtonStyle.style_from(style)
 
         self.collide_rect = pygame.rect.Rect(
             x, y, self.text_width + 20, self.text_height + 25)
@@ -31,19 +50,19 @@ class Button:
     def draw(self):
         x, y = self.x, self.y
         if self.collide_rect.collidepoint(mx(), my()):
-            pygame.draw.rect(screen, colors.Primary, (x, y + 5,
+            pygame.draw.rect(screen, self.main, (x, y + 5,
                              self.text_width + 20, self.text_height + 20), border_radius=5)
             screen.blit(self.text, (x + 10, y + 15))
         else:
-            pygame.draw.rect(screen, colors.PrimaryAccent, (x, y + 5,
+            pygame.draw.rect(screen, self.accent, (x, y + 5,
                              self.text_width + 20, self.text_height + 20), border_radius=5)
-            pygame.draw.rect(screen, colors.Primary, (x, y, self.text_width +
+            pygame.draw.rect(screen, self.main, (x, y, self.text_width +
                              20, self.text_height + 20), border_radius=5)
             screen.blit(self.text, (x + 10, y + 10))
 
 
 class ButtonStackLayout:
-    def __init__(self, x: int, y: int, *btns: Button, margin = 10):
+    def __init__(self, x: int, y: int, *btns: Button):
         """
         Generate a vertical stack of buttons.
         The x is where the buttons should be aligned relative to their midpoints respectively.
@@ -55,9 +74,8 @@ class ButtonStackLayout:
 
         for btn in btns:
             btn.move(x - btn.collide_rect.width // 2, y_pos)
-            y_pos += btn.collide_rect.height + margin
+            y_pos += btn.collide_rect.height + 10
 
-    
     def draw(self):
         for btn in self.btns:
             btn.draw()

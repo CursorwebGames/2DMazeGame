@@ -4,7 +4,7 @@ import sys
 import pygame
 
 from ui import Button, ButtonStyle, ButtonStackLayout
-from utils import WIDTH, screen
+from utils import WIDTH, screen, change_page, PageName
 
 from .page import Page
 
@@ -14,8 +14,8 @@ class Menu(Page):
         super().__init__()
         self.title_font = pygame.font.SysFont("candara", 100, True)
         self.menu_layout = ButtonStackLayout(
-            WIDTH / 2, 150,
-            Button('Play', lambda: print('hi')),
+            WIDTH / 2, 250,
+            Button('Play', lambda: change_page(PageName.Select)),
             Button('Settings', lambda: None, style=ButtonStyle.Secondary),
             Button('Quit', lambda: sys.exit(0), style=ButtonStyle.Warning)
         )

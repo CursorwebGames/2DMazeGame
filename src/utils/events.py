@@ -1,5 +1,5 @@
-from typing import Callable
 from collections import defaultdict
+from typing import Callable
 
 import pygame
 
@@ -21,5 +21,3 @@ def my():
 
 
 event_handler: defaultdict[int, list[Callable[[pygame.event.Event], None]]] = defaultdict(lambda: [])
-
-event_handler[pygame.KEYDOWN].append(lambda _: print(5))

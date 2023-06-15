@@ -28,14 +28,15 @@ class ButtonStyle:
 class Button:
     def __init__(self,
                  text: str,
-                 onclick: Callable[..., Any],
+                 onclick: Callable[[], Any],
                  style: ButtonStyle = ButtonStyle.Primary,
                  font: pygame.font.Font = font,
                  x=0, y=0) -> None:
         self.text = font.render(text, True, (255, 255, 255))
         self.text_width, self.text_height = self.text.get_size()
 
-        event_handler[pygame.MOUSEBUTTONDOWN].append(onclick)
+        self.onclick = onclick
+        event_handler[pygame.MOUSEBUTTONDOWN].append(self.handle)
 
         self.x, self.y = x, y
         self.main, self.accent = ButtonStyle.style_from(style)
@@ -59,6 +60,11 @@ class Button:
             pygame.draw.rect(screen, self.main, (x, y, self.text_width +
                              20, self.text_height + 20), border_radius=5)
             screen.blit(self.text, (x + 10, y + 10))
+    
+    def handle(self, event: pygame.event.Event):
+        left, _, _ = pygame.mouse.get_pressed()
+        if left and self.collide_rect.collidepoint(mx(), my()):
+            self.onclick()
 
 
 class ButtonStackLayout:

@@ -1,3 +1,3 @@
-from .defs import SCREEN_SIZE, WIDTH, HEIGHT, font, clock, screen
-from .events import update_mouse_pos, mx, my, event_handler
+from .defs import HEIGHT, SCREEN_SIZE, WIDTH, clock, font, screen
+from .events import event_handler, mx, my, update_mouse_pos
 from .page_state import page

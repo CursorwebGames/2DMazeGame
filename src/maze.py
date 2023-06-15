@@ -1,4 +1,4 @@
-from defs import SCREEN_SIZE
+from utils import SCREEN_SIZE
 
 
 class Maze:

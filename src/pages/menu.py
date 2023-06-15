@@ -1,9 +1,10 @@
 import random
+import sys
 
 import pygame
 
-from utils import WIDTH, screen
 from ui import Button, ButtonStackLayout
+from utils import WIDTH, screen
 
 from .page import Page
 
@@ -16,7 +17,7 @@ class Menu(Page):
             WIDTH / 2, 150,
             Button('Play'),
             Button('Settings'),
-            Button('Quit')
+            Button('Quit', lambda _: sys.exit(0))
         )
 
         self.title = self.title_font.render("Pyrinth", True, (0, 0, 0))

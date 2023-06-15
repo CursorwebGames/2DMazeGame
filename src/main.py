@@ -11,10 +11,7 @@ import sys
 
 import pygame
 
-from utils import clock, screen, update_mouse_pos, event_handler, page, font
-# from defs import clock, screen
-# from events import update_mouse_pos, event_handler
-# from page_state import page
+from utils import clock, event_handler, font, page, screen, update_mouse_pos
 
 
 class Main:

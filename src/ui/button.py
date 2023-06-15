@@ -1,7 +1,8 @@
-from typing import Callable, Any
+from typing import Any, Callable
+
 import pygame
 
-from utils import font, mx, my, screen
+from utils import font, mx, my, screen, event_handler
 
 from . import colors
 
@@ -15,6 +16,8 @@ class Button:
     def __init__(self, text: str, onclick: Callable[..., Any] = None, x=0, y=0) -> None:
         self.text = font.render(text, True, (255, 255, 255))
         self.text_width, self.text_height = self.text.get_size()
+
+        if onclick: event_handler[pygame.MOUSEBUTTONDOWN].append(onclick)
 
         self.x, self.y = x, y
 

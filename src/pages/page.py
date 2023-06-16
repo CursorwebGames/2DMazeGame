@@ -6,5 +6,4 @@ class Page(ABC):
         super().__init__()
     
     @abstractmethod
-    def draw(self) -> None:
-        pass
+    def draw(self) -> None: pass

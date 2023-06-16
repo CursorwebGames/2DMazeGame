@@ -12,8 +12,11 @@ class PageName:
     Select = "Select"
     Game = "Game"
 
-curr_page = PageName.Menu
+_curr_page = PageName.Menu
 
 def change_page(page):
-    global curr_page
-    curr_page = page
+    global _curr_page
+    _curr_page = page
+
+def curr_page():
+    return _curr_page

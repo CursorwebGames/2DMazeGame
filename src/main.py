@@ -11,8 +11,9 @@ import sys
 
 import pygame
 
-from utils import clock, event_handler, font, curr_page, PageName, screen, update_mouse_pos
-from pages import Menu
+from pages import *
+from utils import (PageName, clock, curr_page, event_handler, font, screen,
+                   update_mouse_pos)
 
 
 class Main:
@@ -23,7 +24,10 @@ class Main:
     This should ONLY handle state, and shouldn't have any mutators.
     """
     def __init__(self) -> None:
-        self.menu = Menu()
+        self.page: dict[str, Page] = {
+            'menu': Menu(),
+            'select': Select()
+        }
 
     def loop(self) -> None:
         while True:
@@ -36,12 +40,18 @@ class Main:
     def draw(self) -> None:
         screen.fill("white")
         
-        match curr_page:
-            case PageName.Menu:
-                self.menu.draw()
+        self.draw_page()
         
         t = font.render(str(int(clock.get_fps())), True, (0, 0, 0))
         screen.blit(t, (0, 0))
+
+    def draw_page(self):
+        match curr_page():
+            case PageName.Menu:
+                self.page['menu'].draw()
+            
+            case PageName.Select:
+                self.page['select'].draw()
 
     def handle_event(self) -> None:
         for event in pygame.event.get():

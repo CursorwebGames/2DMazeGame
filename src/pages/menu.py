@@ -3,8 +3,8 @@ import sys
 
 import pygame
 
-from ui import Button, ButtonStyle, ButtonStackLayout
-from utils import WIDTH, screen, change_page, PageName
+from ui import Button, ButtonStackLayout, ButtonStyle
+from utils import WIDTH, PageName, change_page, screen
 
 from .page import Page
 
